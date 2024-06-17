@@ -15,16 +15,13 @@ export const useStore = create((set) => ({
   },
   updateDocumentsToPay: (selectedDocuments, tableId) =>
     set((state) => {
-      // Mantén los documentos seleccionados por tabla
       const newSelectionByTable = {
         ...state.docToPay.selectionByTable,
         [tableId]: selectedDocuments
       }
 
-      // Combina todas las selecciones de todas las tablas
       const combinedDocuments = Object.values(newSelectionByTable).flat()
 
-      // Elimina duplicados
       const uniqueDocuments = Array.from(
         new Set(combinedDocuments.map((doc) => doc.id))
       ).map((id) => combinedDocuments.find((doc) => doc.id === id))
